@@ -12,16 +12,17 @@ async function main() {
       "TestToken",
       "TK",
       utils.parseEther("10000000"),
-      "0x0000000000000000000000000000",
-      "0x0000000000000000000000000000"
+      "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625",
+      "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625"
     ]
      
     const burnContract = await Burn.deploy(
-      "TestToken",
-      "TK",
-      utils.parseEther("10000000"),
-      "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625",
-      "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625"
+      args[0],args[1],args[2],args[3], args[4]
+      // "TestToken",
+      // "TK",
+      // utils.parseEther("10000000"),
+      // "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625",
+      // "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625"
       );
     await burnContract.deployed();
 
@@ -30,10 +31,10 @@ async function main() {
       burnContract.address
     );
 
-    // await hre.run("verify:verify", {
-    //   address: burnContract.address,
-    //   constructorArguments : args
-    // });
+    await hre.run("verify:verify", {
+      address: burnContract.address,
+      constructorArguments : args
+    });
   }
   
   main()
