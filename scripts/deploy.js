@@ -1,4 +1,5 @@
 const hre = require("hardhat");
+const utils = require("ethers/lib/utils");
 async function main() {
     const [deployer] = await ethers.getSigners();
     console.log("Deploying contracts with the account: ", deployer.address);
@@ -10,13 +11,17 @@ async function main() {
     const args = [
       "TestToken",
       "TK",
-      1000000000000000000000000,
-      0x0000000000000000000000000000,
-      0x0000000000000000000000000000
+      utils.parseEther("10000000"),
+      "0x0000000000000000000000000000",
+      "0x0000000000000000000000000000"
     ]
      
     const burnContract = await Burn.deploy(
-       args[0], args[1], args[2], args[3], arg[4], arg[5]
+      "TestToken",
+      "TK",
+      utils.parseEther("10000000"),
+      "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625",
+      "0x2cd2B72b2838947E9D662d70987FE9C34c9c8625"
       );
     await burnContract.deployed();
 
@@ -25,10 +30,10 @@ async function main() {
       burnContract.address
     );
 
-    await hre.run("verify:verify", {
-      address: burnContract.address,
-      constructorArguments : args
-    });
+    // await hre.run("verify:verify", {
+    //   address: burnContract.address,
+    //   constructorArguments : args
+    // });
   }
   
   main()
